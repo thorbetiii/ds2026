@@ -11,4 +11,4 @@ Student Info
 
 * Student Name: Nguyen Thanh Dat
 * Student ID: 23BI14091
-* Student Group ID: Not-for-now
+* Student Group ID: Group 6
