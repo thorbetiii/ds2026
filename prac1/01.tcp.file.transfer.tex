@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
 \usepackage{graphicx} 
+\usepackage{caption}
 \usepackage{listings} 
 \usepackage{xcolor}
 \usepackage{tikz}     
@@ -14,6 +15,7 @@
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 \lstdefinestyle{mystyle}{
     backgroundcolor=\color{backcolour},   
@@ -61,7 +63,7 @@ To ensure that the server knows exactly what file is arriving and how large it i
 
 \subsection{Protocol Sequence Diagram}
 \begin{center}
-\begin{tikzpicture}[node distance=4cm, auto, thick]
+\begin{tikzpicture}[node distance=7cm, auto, thick]
     % Nodes
     \node (client) {Client};
     \node (server) [right of=client] {Server};
