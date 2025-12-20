@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{float}
+\usepackage{tikz}
+
+\title{Practical Work 5: The Longest Path}
+\author{Nguyen Thanh Dat \\ Student ID: 23BI14091}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+This labwork implements a MapReduce-based project designed to find the longest file path within a provided dataset. This simulation mimics the processing of a large-scale file system index, similar to the output of a \texttt{find /} command, by distributing the computational load across multiple parallel processes.
+
+\section{Mapper and Reducer Design}
+The system utilizes a distributed approach where the task of string length comparison is parallelized across multiple MPI ranks to ensure efficiency.
+
+
+\begin{itemize}
+    \item \textbf{Mapper:} Each rank processes a specific chunk of the total path list. It performs a local comparison to identify the longest string (by character count) within its assigned subset.
+    \item \textbf{Reducer:} The master process (Rank 0) gathers the "champions" (the longest path from each mapper) and performs a final reduction step to determine the global longest path.
+\end{itemize}
+
+\section{Implementation}
+I implemented this system using \texttt{mpi4py} on a Windows environment. For realistic testing, I used a set of local absolute paths from my project directory.
+
+\begin{lstlisting}[language=Python, basicstyle=\small, frame=single, breaklines=true]
+# Data sample used for testing
+data = [
+    "C:/Users/Admin/Documents/usth/b3/distributed_system/ds2026/Practical Work 1/server.py",
+    "C:/Users/Admin/Documents/usth/b3/distributed_system/ds2026/Practical Work 2/RPC/client.py",
+    "C:/Windows/System32/drivers/etc/hosts",
+    "C:/Program Files/Python310/python.exe",
+    "C:/Users/Admin/AppData/Local/MiKTeX/miktex/log/latexmk.log"
+]
+
+# Mapper: Local max calculation
+local_longest = max(my_paths, key=len)
+
+# Reducer: Global max selection
+final_winner = max(all_candidates, key=len)
+\end{lstlisting}
+
+\section{Verification}
+The system was executed with 4 parallel processes. The following screenshot demonstrates the successful identification of the longest path and its character count.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{proof.png}
+    \caption{MapReduce Output: Longest Path Found (89 characters)}
+\end{figure}
+
+\end{document}
